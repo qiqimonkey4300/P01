@@ -1,6 +1,10 @@
-christopherL, ivanM, shyneC -- 2021-12-08 8:40  
+christopherL, ivanM, shyneC -- 2021-12-08 08:40  
 - design document update (completed)  
 
-christopherL, ivanM, shyneC -- 2021-12-09 10:20
-- design document updated as per suggestions (title/description added, sql attributes added, new table for already searched ticker symbols and their information so as to reduce API calls)
+christopherL, ivanM, shyneC -- 2021-12-09 22:20
+- design document updated as per suggestions (title/description added, sql
+attributes added, new table for already searched ticker symbols and their
+information so as to reduce API calls)
 
+christopherL -- 2021-12-10 08:40
+- added basic Styvio functionality for getting stock info
