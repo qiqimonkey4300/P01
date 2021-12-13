@@ -9,6 +9,9 @@ information so as to reduce API calls)
 christopherL -- 2021-12-10 08:40
 - added basic Styvio functionality for getting stock info
 
+ivanM -- 2021-12-13 08:27
+- added basic MediaWiki functionality for getting summaries for companies
+
 christopherL -- 2021-12-13 08:38
 - added placeholder data to reduce API calls during development
 - began framework for displaying data
