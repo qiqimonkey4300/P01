@@ -8,3 +8,7 @@ information so as to reduce API calls)
 
 christopherL -- 2021-12-10 08:40
 - added basic Styvio functionality for getting stock info
+
+christopherL -- 2021-12-13 08:38
+- added placeholder data to reduce API calls during development
+- began framework for displaying data
