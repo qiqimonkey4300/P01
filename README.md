@@ -13,8 +13,8 @@ The following instructions assume that you have Python 3.9 and pip already insta
 
 1. Clone this repository.
 ```
-$ git clone git@github.com:ellakrechmer/ETSSetera-P00.git
-$ cd ETSSetera-P00/app
+$ git clone git@github.com:qiqimonkey4300/P01.git
+$ cd P01/app
 ```
 
 2. Create a new virtual environment.
