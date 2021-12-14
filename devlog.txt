@@ -20,3 +20,4 @@ shyneC -- 2021-12-13 10:45
 christopherL -- 2021-12-14 08:15
 - fixed requirements.txt
 - added stock route
+- added base template
