@@ -7,3 +7,32 @@ P01 -- ArRESTed Development
 
 ## Description
 no-stock-GICS will find and gather information about a company so that a user can understand more before making decisions on purchasing stocks of that company.
+
+## Launch Codes
+The following instructions assume that you have Python 3.9 and pip already installed.
+
+1. Clone this repository.
+```
+$ git clone git@github.com:ellakrechmer/ETSSetera-P00.git
+$ cd ETSSetera-P00/app
+```
+
+2. Create a new virtual environment.
+```
+$ python3 -m venv <name>
+$ source <name>/bin/activate
+```
+_`<name>` represents what your virtual environment will be called, replace it with your preferred name for the venv_
+
+
+3. Install project dependencies.
+```
+(<name>) $ pip3 install -r requirements.txt
+```
+_`(<name>)` indicates that you are in the virtual environment_
+
+  
+4. Run the app.
+```
+(<name>) $ python3 __init__.py
+```
