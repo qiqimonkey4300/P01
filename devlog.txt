@@ -21,3 +21,7 @@ christopherL -- 2021-12-14 08:15
 - fixed requirements.txt
 - added stock route
 - added base template
+
+shyneC -- 2021-12-13 08:40
+- added launch codes
+- added basic Yahoo Finance API functionality for getting stock info, worked on displaying parts
