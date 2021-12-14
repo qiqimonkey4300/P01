@@ -16,3 +16,6 @@ christopherL -- 2021-12-13 08:38
 
 shyneC -- 2021-12-13 10:45
 - added a template to allow the start of displaying information
+
+christopherL -- 2021-12-14 08:15
+- fixed requirements.txt
