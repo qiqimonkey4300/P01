@@ -25,3 +25,6 @@ christopherL -- 2021-12-14 08:15
 shyneC -- 2021-12-13 08:40
 - added launch codes
 - added basic Yahoo Finance API functionality for getting stock info, worked on displaying parts
+
+ivanM -- 2021-12-14 8:40
+- worked on front-end/html, mostly navbar
