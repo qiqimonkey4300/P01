@@ -1,0 +1,25 @@
+<!--
+no-stall-GICS — Christopher Liu, Ivan Mijacika, Shyne Choi, Gavin McGinley
+SoftDev
+P01 — no-stock-GICS
+2022-01-04
+-->
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-xxl my-4 bd-layout">
+  <h1>no-stock-GICS</h1>
+  <p>
+    Welcome! no-stock-GICS is a web application for all of your stock trading
+    needs! Type a company name or ticker symbol in the search bar above to find
+    company background, price information, and sentiment analysis.
+  </p>
+  <p>
+    <a href="{{ url_for('index') }}">Log in</a> or
+    <a href="{{ url_for('index') }}">register</a> to save your favorite stocks
+    for future reference.
+  </p>
+</div>
+
+{% endblock %}

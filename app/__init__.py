@@ -27,9 +27,9 @@ app = Flask(__name__)
 # data = json.loads(response.content)
 
 @app.route("/")
-def homepage():
+def index():
     # return render_template('index.html', name = data["shortName"], currency = data["currency"], high = data["fiftyTwoWeekHigh"], low = data["fiftyTwoWeekLow"])
-    return render_template("index.html")
+    return render_template("guest.html")
 
 
 @app.route("/stock/<ticker>")
