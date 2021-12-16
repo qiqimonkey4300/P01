@@ -20,6 +20,9 @@ P01 — no-stock-GICS
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
     {% if title %}
     <title>{{ title }}</title>
     {% else %}
@@ -57,14 +60,10 @@ P01 — no-stock-GICS
           <div class="px-3 py-2">
             <div class="container d-flex flex-wrap justify-content-center">
               <form class="d-flex">
-                <div class="input-group">
+                <div class="input-group me-3">
                   <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon2">@example.com</span>
-                  </div>
+                  <span class="input-group-text" type="submit"><i class="fas fa-search"></i></span>
                 </div>
-                
-                <button class="btn btn-outline-success me-2" type="submit">Search</button>
               </form>
       
               <div class="text-end">

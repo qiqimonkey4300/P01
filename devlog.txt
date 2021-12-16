@@ -31,3 +31,7 @@ ivanM -- 2021-12-14 08:40
 
 christopherL -- 2021-12-15 08:13
 - added a landing page for new users
+
+christopherL -- 2021-12-16 08:11
+- updated the navbar
+- added stock.html boilerplate
