@@ -10,7 +10,7 @@ from flask import Flask, render_template
 
 from styvio import Stock
 
-# app = Flask(__name__)
+app = Flask(__name__)
 #
 # with open("api_keys/yahoofinance.txt", "r", encoding="utf-8") as key:
 #     YFA_KEY = key.read().strip()
