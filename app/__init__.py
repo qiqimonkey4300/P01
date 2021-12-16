@@ -10,25 +10,24 @@ from flask import Flask, render_template
 
 from styvio import Stock
 
-app = Flask(__name__)
-
+# app = Flask(__name__)
+#
 # with open("api_keys/yahoofinance.txt", "r", encoding="utf-8") as key:
 #     YFA_KEY = key.read().strip()
 #
-# url = "https://yfapi.net/v6/finance/quote"
+# url = "https://yfapi.net/v6/finance/recommendationsbysymbol/AAPL"
 #
-# querystring = {"symbols":"AAPL,BTC-USD,EURUSD=X"}
+# querystring = {"symbols":"AAPL"}
 #
-# headers = {
-    # 'x-api-key': YFA_KEY
-#     }
+# headers = {'x-api-key': YFA_KEY}
 #
 # response = requests.request("GET", url, headers=headers, params=querystring)
 # data = json.loads(response.content)
 
+# print(response.text)
+
 @app.route("/")
 def index():
-    # return render_template('index.html', name = data["shortName"], currency = data["currency"], high = data["fiftyTwoWeekHigh"], low = data["fiftyTwoWeekLow"])
     return render_template("guest.html")
 
 
