@@ -38,3 +38,7 @@ christopherL -- 2021-12-16 08:11
 
 christopherL -- 2021-12-16 22:22
 - added registration page and functionality
+
+christopherL -- 2021-12-17 08:17
+- added login page and functionality
+- added basic homepage for logged in users

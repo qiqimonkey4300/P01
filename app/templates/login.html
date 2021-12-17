@@ -9,49 +9,42 @@ P01 — no-stock-GICS
 
 {% block content %}
 <div class="container-xxl my-4 bd-layout">
-  <h1>Register</h1>
-  <form action="/register" method="POST" class="row g-3 needs-validation" novalidate>
+  <h1>Log In</h1>
+  <form action="/login" method="POST" class="row g-3 needs-validation" novalidate>
     <div class="col-md-12">
       <label for="username" class="form-label">Username</label>
-      {% if errors and "user_not_unique" in errors %}
+      {% if error %}
       <input type="text" class="form-control is-invalid" id="username" name="username" required>
       <div class="invalid-feedback">
-        Username already in use.
+        Username or password incorrect.
       </div>
       {% else %}
       <input type="text" class="form-control" id="username" name="username" required>
       <div class="invalid-feedback">
-        Please enter a username.
+        Please enter your username.
       </div>
       {% endif %}
     </div>
     <div class="col-md-12">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required>
+      {% if error %}
+      <input type="password" class="form-control is-invalid" id="password" name="password" required>
       <div class="invalid-feedback">
-        Please enter a password.
-      </div>
-    </div>
-    <div class="col-md-12">
-      <label for="password_check" class="form-label">Confirm Password</label>
-      {% if errors and "pass_not_match" in errors %}
-      <input type="password" class="form-control is-invalid" id="password_check" name="password_check" required>
-      <div class="invalid-feedback">
-        Passwords must match.
+        Username or password incorrect.
       </div>
       {% else %}
-      <input type="password" class="form-control" id="password_check" name="password_check" required>
+      <input type="password" class="form-control" id="password" name="password" required>
       <div class="invalid-feedback">
-        Please confirm your password.
+        Please enter your password.
       </div>
       {% endif %}
     </div>
     <div class="col-12">
-      <button class="btn btn-primary" type="submit">Register</button>
+      <button class="btn btn-primary" type="submit">Log In</button>
     </div>
   </form>
   <div class="my-4">
-    <p>Already registered? Log in <a href="{{ url_for('login') }}">here</a>.</p>
+    <p>New user? Register <a href="{{ url_for('register') }}">here</a>.</p>
   </div>
 </div>
 

@@ -3,15 +3,17 @@
 # P01 — no-stock-GICS
 # 2022-01-04
 
+from os import urandom
 import requests
 import json
 
 from flask import Flask, render_template, redirect, session, url_for, request
 
-from auth import create_user
+from auth import create_user, authenticate_user
 from styvio import Stock
 
 app = Flask(__name__)
+app.secret_key = urandom(32)
 #
 # with open("api_keys/yahoofinance.txt", "r", encoding="utf-8") as key:
 #     YFA_KEY = key.read().strip()
@@ -27,8 +29,11 @@ app = Flask(__name__)
 
 # print(response.text)
 
+
 @app.route("/")
 def index():
+    if "username" in session:
+        return render_template("home.html", username=session["username"])
     return render_template("guest.html")
 
 
@@ -52,7 +57,37 @@ def register():
         return render_template("register.html", errors=errors)
 
     # Maybe put a flash message here to confirm everything works
-    return redirect(url_for("index"))  # should be login
+    return redirect(url_for("login"))  # should be login
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """Displays login form and handles form response."""
+    if "username" in session:
+        return redirect(url_for("index"))
+
+    # GET request: display the form
+    if request.method == "GET":
+        return render_template("login.html")
+
+    # POST request: handle the form response and redirect
+    username = request.form.get("username", default="")
+    password = request.form.get("password", default="")
+
+    if authenticate_user(username, password):
+        session["username"] = username
+        return redirect(url_for("index"))
+
+    return render_template("login.html", error="incorrect")
+
+
+@app.route("/logout")
+def logout():
+    """Logs out the current user."""
+
+    if "username" in session:
+        del session["username"]
+    return redirect(url_for("index"))
 
 
 @app.route("/stock/<ticker>")
