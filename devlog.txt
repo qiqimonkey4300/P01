@@ -35,3 +35,6 @@ christopherL -- 2021-12-15 08:13
 christopherL -- 2021-12-16 08:11
 - updated the navbar
 - added stock.html boilerplate
+
+christopherL -- 2021-12-16 22:22
+- added registration page and functionality
