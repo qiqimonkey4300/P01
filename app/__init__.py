@@ -76,9 +76,10 @@ def logout():
     return redirect(url_for("index"))
 
 
-#@app.route("/search?q=<searchquery>")
-#def search(searchquery):
-    # search_query =
+@app.route("/search?q=<searchquery>")
+def search(searchquery):
+    search_query = YF(searchquery)
+    return search_query.autocomplete()
 
 
 @app.route("/stock/<ticker>")
