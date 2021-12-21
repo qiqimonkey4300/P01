@@ -11,6 +11,7 @@ from flask import Flask, render_template, redirect, session, url_for, request
 
 from auth import create_user, authenticate_user
 from styvio import Stock
+from yahoofinance import YF
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
@@ -77,7 +78,7 @@ def logout():
 
 
 @app.route("/search?q=<searchquery>")
-def search(searchquery):
+def search():
     search_query = YF(searchquery)
     return search_query.autocomplete()
 
