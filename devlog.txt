@@ -49,6 +49,9 @@ christopherL -- 2021-12-17 08:17
 shyneC -- 2021-12-17 08:40
 - added basic YFAPI autocomplete functionality
 
+ivanM -- 2021-12-20 8:39
+- worked on stock.html template
+
 shyneC -- 2021-12-20 17:10
 - added class YFAPI
 - moved relevant code into new file
