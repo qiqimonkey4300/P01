@@ -64,3 +64,9 @@ christopherL -- 2021-12-21 08:15
 
 christopherL -- 2021-12-21 08:41
 - added Styvio sentiment analysis
+
+shyneC -- 2021-12-21 18:55
+- added search functionality through navbar search bar (takes anything, even empty)
+  - it just displays the ugly result of the YF autocomplete
+- added search.html to display search results
+- smth to fix: the magnifying glass for the search bar doesn't do anything

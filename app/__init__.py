@@ -15,8 +15,17 @@ app = Flask(__name__)
 app.secret_key = urandom(32)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
+
+    # finds possible tickers from what's searched
+    if request.method == "POST":
+        search_query = request.form.get("searchquery")
+        # print(search_query)
+        s = YF(search_query)
+        search_results = s.autocomplete()
+        return render_template("search.html", search_results = search_results)
+
     if "username" in session:
         username = session["username"]
         favorites = get_favorites(get_user_id(username))
@@ -76,12 +85,6 @@ def logout():
     if "username" in session:
         del session["username"]
     return redirect(url_for("index"))
-
-
-@app.route("/search?q=<searchquery>")
-def search():
-    search_query = YF(searchquery)
-    return search_query.autocomplete()
 
 
 @app.route("/stock/<ticker>")

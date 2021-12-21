@@ -58,13 +58,13 @@ P01 — no-stock-GICS
           </ul>
           <div class="px-3 py-2">
             <div class="container d-flex flex-wrap justify-content-center">
-              <form class="d-flex">
+              <form class="d-flex" action="/" method="POST">
                 <div class="input-group me-3">
-                  <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                  <input class="form-control" type="search" placeholder="Search..." aria-label="Search" id="searchquery" name="searchquery">
                   <span class="input-group-text" type="submit"><i class="fas fa-search"></i></span>
                 </div>
               </form>
-      
+
               <div class="text-end">
                 {% if "username" in session %}
                 <a href="{{ url_for('logout') }}"><button type="button" class="btn btn-primary">Logout</button></a>
