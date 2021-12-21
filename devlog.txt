@@ -61,3 +61,6 @@ christopherL -- 2021-12-21 08:15
 - updated navbar
 - improved team flag
 - renamed auth.py to user.py
+
+christopherL -- 2021-12-21 08:41
+- added Styvio sentiment analysis
