@@ -52,3 +52,9 @@ shyneC -- 2021-12-17 08:40
 shyneC -- 2021-12-20 17:10
 - added class YFAPI
 - moved relevant code into new file
+
+christopherL -- 2021-12-21 08:15
+- added favorites feature
+- updated navbar
+- improved team flag
+- renamed auth.py to user.py

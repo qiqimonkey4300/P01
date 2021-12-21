@@ -4,12 +4,10 @@
 # 2022-01-04
 
 from os import urandom
-import requests
-import json
 
 from flask import Flask, render_template, redirect, session, url_for, request
 
-from auth import create_user, authenticate_user
+from user import create_user, authenticate_user, get_user_id, get_favorites
 from styvio import Stock
 from yahoofinance import YF
 
@@ -20,7 +18,10 @@ app.secret_key = urandom(32)
 @app.route("/")
 def index():
     if "username" in session:
-        return render_template("home.html", username=session["username"])
+        username = session["username"]
+        favorites = get_favorites(get_user_id(username))
+
+        return render_template("home.html", username=username, favorites=favorites)
     return render_template("guest.html")
 
 

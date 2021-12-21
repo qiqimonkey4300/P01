@@ -4,9 +4,10 @@
 # 2022-01-04
 
 """
-Authentication
+User
 
-Handles all of the login/registration functionality and input validation.
+Handles all of the login/registration functionality and input validation, as
+well as the "favorites" functionality.
 """
 
 import hashlib
@@ -54,7 +55,8 @@ def create_user(username: str, password: str, password_check: str) -> list:
             CREATE TABLE IF NOT EXISTS users(
                 user_id     TEXT PRIMARY KEY DEFAULT (hex(randomblob(8))),
                 username    TEXT,
-                password    TEXT
+                password    TEXT,
+                favorites   TEXT
             )
         """
         )
@@ -63,8 +65,8 @@ def create_user(username: str, password: str, password_check: str) -> list:
         if not errors:
             password_hash = hash_password(password)
             c.execute(
-                "INSERT INTO users(username, password) VALUES (?, ?)",
-                (username, password_hash),
+                "INSERT INTO users(username, password, favorites) VALUES (?, ?, ?)",
+                (username, password_hash, ""),
             )
 
         return errors
@@ -121,3 +123,49 @@ def get_username(user_id: str) -> str:
         if username is not None:
             return username[0]
         return None
+
+
+def get_favorites(user_id: str) -> list:
+    """Returns the favorite stocks associated with the given user_id, None if
+    user doesn't exist."""
+
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+
+        favorites = c.execute(
+            "SELECT favorites FROM users WHERE user_id=:user_id", {"user_id": user_id}
+        ).fetchone()
+
+        if favorites is not None:
+            return favorites[0].split(",") if favorites[0] != "" else []
+        return None
+
+
+def add_favorite(user_id: str, ticker: str) -> None:
+    """Adds the specified ticker to the given user_id's favorites list."""
+
+    favorites = get_favorites(user_id)
+    if ticker not in favorites:
+        favorites.append(ticker)
+    print(favorites)
+    
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+
+        c.execute(
+            "UPDATE users SET favorites=? WHERE user_id=?", (",".join(favorites), user_id)
+        )
+
+
+def remove_favorite(user_id: str, ticker: str) -> None:
+    """Removes the specified ticker from the given user_id's favorites list."""
+    favorites = get_favorites(user_id)
+    if ticker in favorites:
+        favorites.remove(ticker)
+    
+    with sqlite3.connect(DB_FILE) as db:
+        c = db.cursor()
+
+        c.execute(
+            "UPDATE users SET favorites=? WHERE user_id=?", (",".join(favorites), user_id)
+        )
