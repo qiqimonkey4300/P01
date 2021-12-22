@@ -70,3 +70,6 @@ shyneC -- 2021-12-21 18:55
   - it just displays the ugly result of the YF autocomplete
 - added search.html to display search results
 - smth to fix: the magnifying glass for the search bar doesn't do anything
+
+ivanM -- 2021-12-21 23:07
+- added more to stock template, including conditionals and variables
