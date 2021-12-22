@@ -148,12 +148,13 @@ def add_favorite(user_id: str, ticker: str) -> None:
     if ticker not in favorites:
         favorites.append(ticker)
     print(favorites)
-    
+
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()
 
         c.execute(
-            "UPDATE users SET favorites=? WHERE user_id=?", (",".join(favorites), user_id)
+            "UPDATE users SET favorites=? WHERE user_id=?",
+            (",".join(favorites), user_id),
         )
 
 
@@ -162,10 +163,11 @@ def remove_favorite(user_id: str, ticker: str) -> None:
     favorites = get_favorites(user_id)
     if ticker in favorites:
         favorites.remove(ticker)
-    
+
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()
 
         c.execute(
-            "UPDATE users SET favorites=? WHERE user_id=?", (",".join(favorites), user_id)
+            "UPDATE users SET favorites=? WHERE user_id=?",
+            (",".join(favorites), user_id),
         )

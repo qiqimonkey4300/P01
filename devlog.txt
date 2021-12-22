@@ -73,3 +73,7 @@ shyneC -- 2021-12-21 18:55
 
 ivanM -- 2021-12-21 23:07
 - added more to stock template, including conditionals and variables
+
+christopherL -- 2021-12-22 08:18
+- make the search submit button work
+- reformat code with Black

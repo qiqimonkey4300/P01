@@ -33,7 +33,7 @@ def search():
     # print(search_query)
     s = YF(search_query)
     search_results = s.autocomplete()
-    return render_template("search.html", search_results = search_results)
+    return render_template("search.html", search_results=search_results)
 
 
 @app.route("/register", methods=["GET", "POST"])
