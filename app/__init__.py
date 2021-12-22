@@ -15,23 +15,25 @@ app = Flask(__name__)
 app.secret_key = urandom(32)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-
-    # finds possible tickers from what's searched
-    if request.method == "POST":
-        search_query = request.form.get("searchquery")
-        # print(search_query)
-        s = YF(search_query)
-        search_results = s.autocomplete()
-        return render_template("search.html", search_results = search_results)
-
     if "username" in session:
         username = session["username"]
         favorites = get_favorites(get_user_id(username))
 
         return render_template("home.html", username=username, favorites=favorites)
     return render_template("guest.html")
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+
+    # finds possible tickers from what's searched
+    search_query = request.args.get("searchquery")
+    # print(search_query)
+    s = YF(search_query)
+    search_results = s.autocomplete()
+    return render_template("search.html", search_results = search_results)
 
 
 @app.route("/register", methods=["GET", "POST"])
