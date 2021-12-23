@@ -74,6 +74,9 @@ shyneC -- 2021-12-21 18:55
 ivanM -- 2021-12-21 23:07
 - added more to stock template, including conditionals and variables
 
+shyneC -- 2021-12-22 08:15
+- moved search functionality to own @app.route
+
 christopherL -- 2021-12-22 08:18
 - make the search submit button work
 - reformat code with Black
