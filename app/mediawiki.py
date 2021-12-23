@@ -7,7 +7,7 @@
 MediaWiki
 """
 
-import requests
+import requests, json
 
 class MW:
 
@@ -21,13 +21,16 @@ class MW:
         company name""" #or ticker?
 
         api_request = requests.get(
-            f"https://en.wikipedia.org/w/rest.php/v1/search/page?q={self.cname}") #"&limit={NUMOFRESULTS}" is this needed?
+            f"https://en.wikipedia.org/w/rest.php/v1/search/page?q={self.cname}" #"&limit={NUMOFRESULTS}" is this needed?
         )
         try:
             wiki = api_request.json()
-            summary = wiki[pages][0][excerpt] #needs work, "amazon"'s first result is the people/rainforest
+            summary = wiki['pages'][0]['excerpt'] #needs work, "amazon"'s first result is the people/rainforest
+            return summary
 
         #return filter(summary)
+        except json.decoder.JSONDecodeError:
+            return None
 
 
 if __name__ == "__main__":

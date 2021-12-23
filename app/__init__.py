@@ -10,6 +10,7 @@ from flask import Flask, render_template, redirect, session, url_for, request
 from user import create_user, authenticate_user, get_user_id, get_favorites
 from styvio import Stock
 from yahoofinance import YF
+from mediawiki import MW
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
@@ -89,10 +90,17 @@ def logout():
     return redirect(url_for("index"))
 
 
+#@app.route("/stock/<ticker>")
+#def stock(ticker):
+#    stock_obj = Stock(ticker)
+#    return stock_obj.get_short_name()
+
+
 @app.route("/stock/<ticker>")
 def stock(ticker):
-    stock_obj = Stock(ticker)
-    return stock_obj.get_short_name()
+    c = MW(ticker) #should use company name instead of ticker
+    summary = c.get_summary()
+    return render_template("stock.html", summary=summary)
 
 
 if __name__ == "__main__":
