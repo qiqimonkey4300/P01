@@ -23,8 +23,14 @@ class YF:
         data = json.loads(response.content)
         return data
 
-    # def summary(self) -> :
-    #     ..
+    def summary(self) -> dict:
+        url = "https://yfapi.net/v11/finance/quoteSummary/"
+        querystring = {"lang": "en", "region": "US", "modules": "summaryDetail,assetProfile,defaultKeyStatistics", "symbol": self.searchquery}
+        url += querystring["symbol"]
+        headers = {"x-api-key": YFA_KEY}
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        data = json.loads(response.content)
+        return data
 
     # def recs(self) -> dict:
     #     ..
@@ -32,4 +38,4 @@ class YF:
 
 if __name__ == "__main__":
     apple = YF("AAPL")
-    print(apple.autocomplete())
+    print(apple.summary())
