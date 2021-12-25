@@ -33,8 +33,9 @@ def search():
     search_query = request.args.get("searchquery")
     # print(search_query)
     s = YF(search_query)
-    search_results = s.autocomplete()
-    return render_template("search.html", search_results=search_results)
+    sr = s.autocomplete()
+    result = sr["ResultSet"]["Result"]
+    return render_template("search.html", result=result)
 
 
 @app.route("/register", methods=["GET", "POST"])

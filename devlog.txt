@@ -83,3 +83,6 @@ christopherL -- 2021-12-22 08:18
 
 shyneC -- 2021-12-23 08:35
 - added the YFA functionality of a summary (possibly adjust the information being shown later)
+
+shyneC -- 2021-12-25 14:34
+- made the search result more readable

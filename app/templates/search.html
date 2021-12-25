@@ -11,9 +11,22 @@ P01 — no-stock-GICS
 <div class="container-xxl my-4 bd-layout">
   <h1>no-stock-GICS</h1>
 
-  <p>
-    {{search_results}}
-  </p>
+  <table>
+  {% for i in result %}
+
+    {% for key in i %}
+       <tr>
+            <th> {{ key }} </th>
+            <td> {{ i[key] }} </td>
+       </tr>
+    {% endfor %}
+
+  {% endfor %}
+
+  </table>
+
+  {{result}}
+
 </div>
 
 {% endblock %}
