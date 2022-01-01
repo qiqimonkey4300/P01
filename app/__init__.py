@@ -9,8 +9,8 @@ from flask import Flask, render_template, redirect, session, url_for, request
 
 from user import create_user, authenticate_user, get_user_id, get_favorites
 from styvio import Stock
-from yahoofinance import YF
 from mediawiki import MW
+from yahoofinance import autocomplete
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
@@ -24,18 +24,6 @@ def index():
 
         return render_template("home.html", username=username, favorites=favorites)
     return render_template("guest.html")
-
-
-@app.route("/search", methods=["GET", "POST"])
-def search():
-
-    # finds possible tickers from what's searched
-    search_query = request.args.get("searchquery")
-    # print(search_query)
-    s = YF(search_query)
-    sr = s.autocomplete()
-    result = sr["ResultSet"]["Result"]
-    return render_template("search.html", result=result)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -91,15 +79,33 @@ def logout():
     return redirect(url_for("index"))
 
 
-#@app.route("/stock/<ticker>")
-#def stock(ticker):
+@app.route("/search")
+def search():
+    """Displays a search result page containing possible autocomplete stock
+    ticker symbols based on the search query."""
+
+    if "searchquery" not in request.args or request.args.get("searchquery") == "":
+        return redirect(url_for("index"))
+
+    search_query = request.args.get("searchquery")
+    autocomplete_results = autocomplete(search_query)
+    print(autocomplete_results)
+    return render_template(
+        "search.html",
+        search_query=search_query,
+        autocomplete_results=autocomplete_results,
+    )
+
+
+# @app.route("/stock/<ticker>")
+# def stock(ticker):
 #    stock_obj = Stock(ticker)
 #    return stock_obj.get_short_name()
 
 
 @app.route("/stock/<ticker>")
 def stock(ticker):
-    c = MW(ticker) #should use company name instead of ticker
+    c = MW(ticker)  # should use company name instead of ticker
     summary = c.get_summary()
     return render_template("stock.html", summary=summary)
 

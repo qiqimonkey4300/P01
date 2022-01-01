@@ -9,24 +9,28 @@ P01 — no-stock-GICS
 
 {% block content %}
 <div class="container-xxl my-4 bd-layout">
-  <h1>no-stock-GICS</h1>
+  <h2>Search Results</h2>
 
-  <table>
-  {% for i in result %}
-
-    {% for key in i %}
-       <tr>
-            <th> {{ key }} </th>
-            <td> {{ i[key] }} </td>
-       </tr>
-    {% endfor %}
-
-  {% endfor %}
-
-  </table>
-
-  {{result}}
-
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">You searched for: "{{ search_query }}"</h6>
+    {% if autocomplete_results %}
+      {% for result in autocomplete_results %}
+        <div class="media pt-3">
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <a href="{{ url_for('stock', ticker=result['symbol']) }}">
+              <strong class="d-block text-gray-dark">{{ result["name"] }} ({{ result["symbol"] }})</strong>
+            </a>
+            Exchange: {{ result["exch"] }}
+          </p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="media text-muted pt-3">
+        No results found! Make sure all of your words are spelled correctly. It
+        might also be a problem on our end; we'll be sure to get things
+        running again as soon as possible!
+      </div>
+    {% endif %}
 </div>
 
 {% endblock %}
