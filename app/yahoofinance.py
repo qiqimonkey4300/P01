@@ -3,6 +3,12 @@
 # P01 — no-stock-GICS
 # 2022-01-04
 
+"""
+Yahoo Finance
+
+Handles all API queries and YFinance-related functionality.
+"""
+
 
 import json
 
@@ -23,7 +29,7 @@ def autocomplete(query: str) -> dict:
         params=params,
     )
 
-    if api_request.status_code != requests.codes.ok:
+    if api_request.status_code != requests.codes.ok:  # pylint: disable=no-member
         return None
 
     try:
@@ -35,38 +41,3 @@ def autocomplete(query: str) -> dict:
 
     except json.decoder.JSONDecodeError:
         return None
-
-
-# class YF:
-#     def __init__(self, searchquery: str):
-#         self.searchquery = searchquery
-
-#     def autocomplete(self) -> dict:
-#         url = "https://yfapi.net/v6/finance/autocomplete/"
-#         querystring = {"lang": "en", "query": self.searchquery}
-#         headers = {"x-api-key": YFA_KEY}
-#         response = requests.request("GET", url, headers=headers, params=querystring)
-#         data = json.loads(response.content)
-#         return data
-
-#     def summary(self) -> dict:
-#         url = "https://yfapi.net/v11/finance/quoteSummary/"
-#         querystring = {
-#             "lang": "en",
-#             "region": "US",
-#             "modules": "summaryDetail,assetProfile,defaultKeyStatistics",
-#             "symbol": self.searchquery,
-#         }
-#         url += querystring["symbol"]
-#         headers = {"x-api-key": YFA_KEY}
-#         response = requests.request("GET", url, headers=headers, params=querystring)
-#         data = json.loads(response.content)
-#         return data
-
-#     # def recs(self) -> dict:
-#     #     ..
-
-
-# if __name__ == "__main__":
-#     apple = YF("AAPL")
-#     print(apple.summary())
