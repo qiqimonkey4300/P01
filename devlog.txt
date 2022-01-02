@@ -86,3 +86,8 @@ shyneC -- 2021-12-23 08:35
 
 shyneC -- 2021-12-25 14:34
 - made the search result more readable
+
+christopherL -- 2022-01-01 19:29
+- updated search results page with links and nicer styling
+- returned Yahoo Finance data for stocks
+- added inline documentation
