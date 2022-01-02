@@ -17,7 +17,7 @@ from flask import Flask, render_template, redirect, session, url_for, request
 from user import create_user, authenticate_user, get_user_id, get_favorites
 from styvio import get_stock_sentiment
 from mediawiki import MW
-from yahoofinance import autocomplete, summary_data
+from yahoofinance import autocomplete, summary_data, price_chart
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
@@ -127,6 +127,8 @@ def stock(ticker):
         logo_url = ""
         recommendation = "N/A"
 
+    chart = price_chart(ticker)
+
     c = MW(ticker)  # should use company name instead of ticker
     summary = c.get_summary()
 
@@ -139,6 +141,7 @@ def stock(ticker):
         recommendation=recommendation,
         key_stats=key_stats,
         summary=summary,
+        chart=chart,
     )
 
 

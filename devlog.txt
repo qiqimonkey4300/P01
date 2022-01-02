@@ -91,3 +91,7 @@ christopherL -- 2022-01-01 19:29
 - updated search results page with links and nicer styling
 - returned Yahoo Finance data for stocks
 - added inline documentation
+
+christopherL -- 2022-01-01 20:18
+- added price chart
+- fixed some edge case issues
