@@ -12,13 +12,13 @@ P01 — no-stock-GICS
     <div class="row">
       <div class="col-md-3">
         <h3> {{ ticker }} </h3>
-        <h1> {{ company }} </h1>
+        <h1> {{ name }} </h1>
       </div>
       <div class="col-md-5">
-        <img src= {{ logo }} alt="logo">
+        <img src= {{ logo_url }} alt="logo">
       </div>
       <div class="col-md-4">
-        <h4> Current Price: {{ price }} </h4>
+        <h4> Current Price: {{ current_price }} </h4>
         {% if recommendation == "BUY" %}
           <p class="text-success">BUY</p>
         {% else %}
@@ -31,7 +31,7 @@ P01 — no-stock-GICS
     <div class="row">
       <div class="col">
         <h4> Quick Info </h4>
-        <p> wow lots of info </p>  <!-- needs a template variable -->
+        <p> {{ key_stats }} </p>  <!-- needs a template variable -->
       </div>
       <div class="col">
         <img src="https://media.ycharts.com/charts/838c39f014d415fa1f6426ce17767160.png" alt="chart">

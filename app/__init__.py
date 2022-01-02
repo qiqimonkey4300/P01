@@ -3,14 +3,21 @@
 # P01 — no-stock-GICS
 # 2022-01-04
 
+"""
+App and Routes
+
+Handles Flask routing for the app.
+"""
+
+
 from os import urandom
 
 from flask import Flask, render_template, redirect, session, url_for, request
 
 from user import create_user, authenticate_user, get_user_id, get_favorites
-from styvio import Stock
+from styvio import get_stock_sentiment
 from mediawiki import MW
-from yahoofinance import autocomplete
+from yahoofinance import autocomplete, summary_data
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
@@ -18,6 +25,7 @@ app.secret_key = urandom(32)
 
 @app.route("/")
 def index():
+    """Displays homepage."""
     if "username" in session:
         username = session["username"]
         favorites = get_favorites(get_user_id(username))
@@ -97,17 +105,41 @@ def search():
     )
 
 
-# @app.route("/stock/<ticker>")
-# def stock(ticker):
-#    stock_obj = Stock(ticker)
-#    return stock_obj.get_short_name()
-
-
 @app.route("/stock/<ticker>")
 def stock(ticker):
+    """Displays detailed information about the stock associated with the given
+    ticker symbol."""
+
+    key_stats = summary_data(ticker)
+    if key_stats:
+        current_price = key_stats.pop("current_price")
+    else:
+        current_price = "N/A"
+
+    sentiment = get_stock_sentiment(ticker)
+    if sentiment:
+        name = sentiment["name"]
+        logo_url = sentiment["logo"]
+        rating = sentiment["rating"]
+        recommendation = "SELL" if rating == "Bullish" else "BUY"
+    else:
+        name = "N/A"
+        logo_url = ""
+        recommendation = "N/A"
+
     c = MW(ticker)  # should use company name instead of ticker
     summary = c.get_summary()
-    return render_template("stock.html", summary=summary)
+
+    return render_template(
+        "stock.html",
+        name=name,
+        ticker=ticker,
+        logo_url=logo_url,
+        current_price=current_price,
+        recommendation=recommendation,
+        key_stats=key_stats,
+        summary=summary,
+    )
 
 
 if __name__ == "__main__":
