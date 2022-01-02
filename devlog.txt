@@ -95,3 +95,8 @@ christopherL -- 2022-01-01 19:29
 christopherL -- 2022-01-01 20:18
 - added price chart
 - fixed some edge case issues
+
+christopherL -- 2022-01-02 16:14
+- added some error handling
+- made the stock page prettier
+- added favorite/unfavorite feature

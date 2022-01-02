@@ -9,38 +9,69 @@ P01 — no-stock-GICS
 
 {% block content %}
   <div class="container-xxl my-4 bd-layout">
-    <div class="row">
-      <div class="col-md-3">
-        <h3> {{ ticker }} </h3>
-        <h1> {{ name }} </h1>
+    <div class="row gy-4 my-4">
+      <div class="col-md-5">
+        {% if logo_url %}
+        <img src="{{ logo_url }}" class="img-thumbnail rounded float-start me-4" style="max-height:100px;">
+        {% endif %}
+        <h1>{{ name }}</h1>
+        <h3>{{ ticker }}</h3>
       </div>
       <div class="col-md-5">
-        <img src= {{ logo_url }} alt="logo">
-      </div>
-      <div class="col-md-4">
-        <h4> Current Price: {{ current_price }} </h4>
+        <h1>Current Price: {{ current_price }}</h1>
         {% if recommendation == "BUY" %}
-          <p class="text-success">BUY</p>
-        {% else %}
-          <p class="text-danger">SELL</p>
+        <h3 class="text-success">BUY</h3>
+        {% elif recommendation == "SELL" %}
+        <h3 class="text-danger">SELL</h3>
         {% endif %}
       </div>
-  </div>
-
-  <div class="container-xxl my-4 pt-3 bd-layout bg-white rounded" style="--bs-bg-opacity: .5;">
-    <div class="row">
-      <div class="col">
-        <h4> Quick Info </h4>
-        <p> {{ key_stats }} </p>  <!-- needs a template variable -->
+      <div class="col-md-2">
+        {% if is_favorite %}
+        <a href="{{ url_for('unfavorite', ticker=ticker) }}"><button type="button" class="btn btn-warning btn-lg">Unfavorite</button></a>
+        {% else %}
+        <a href="{{ url_for('favorite', ticker=ticker) }}"><button type="button" class="btn btn-outline-warning btn-lg">Favorite</button></a>
+        {% endif %}
       </div>
-      <div class="col">
-        <img src="data:image/png;base64,{{ chart }}" alt="chart">
+    </div>
+    <div class="row gy-4 pt-3">
+      <div class="col-md-3 pt-3 bg-secondary text-white rounded" style="--bs-bg-opacity: .5;">
+        <h3>Key Stats</h3>
+        {% if key_stats %}
+        <table class="table table-borderless">
+          <tr>
+            <td>Market Cap</td>
+            <td>{{ key_stats["market_cap"] }}</td>
+          </tr>
+          <tr>
+            <td>Dividend Rate</td>
+            <td>{{ key_stats["dividend_rate"] }}</td>
+          </tr>
+          <tr>
+            <td>Dividend Yield</td>
+            <td>{{ key_stats["dividend_yield"] }}</td>
+          </tr>
+          <tr>
+            <td>Payout Ratio</td>
+            <td>{{ key_stats["payout_ratio"] }}</td>
+          </tr>
+          <tr>
+            <td>Beta</td>
+            <td>{{ key_stats["beta"] }}</td>
+          </tr>
+          <tr>
+            <td>Trailing PE</td>
+            <td>{{ key_stats["trailing_pe"] }}</td>
+          </tr>
+        </table>
+        {% endif %}
       </div>
-      <div class="col">
-        <h4> Company Summary from Wikipedia: </h4>
-        <p> {{ summary }} </p>
+      <div class="col-md-6 text-centered">
+        <img src="data:image/png;base64,{{ chart }}" class="img-fluid" alt="Six-Month Price Chart">
+      </div>
+      <div class="col-md-3 pt-3">
+        <h3>Company Summary</h3>
+        <p>{{ summary }}</p>
       </div>
     </div>
   </div>
-
 {% endblock %}

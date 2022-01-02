@@ -72,6 +72,8 @@ def summary_data(ticker: str) -> dict:
         params=params,
     )
 
+    print(api_request)
+
     if api_request.status_code != requests.codes.ok:  # pylint: disable=no-member
         return None
 

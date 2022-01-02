@@ -10,11 +10,18 @@ Handles Flask routing for the app.
 """
 
 
-from os import urandom
+from os import remove, urandom
 
 from flask import Flask, render_template, redirect, session, url_for, request
 
-from user import create_user, authenticate_user, get_user_id, get_favorites
+from user import (
+    create_user,
+    authenticate_user,
+    get_user_id,
+    get_favorites,
+    add_favorite,
+    remove_favorite,
+)
 from styvio import get_stock_sentiment
 from mediawiki import MW
 from yahoofinance import autocomplete, summary_data, price_chart
@@ -97,11 +104,16 @@ def search():
 
     search_query = request.args.get("searchquery")
     autocomplete_results = autocomplete(search_query)
-    print(autocomplete_results)
+
+    favorites = None
+    if "username" in session:
+        favorites = get_favorites(get_user_id(session["username"]))
+
     return render_template(
         "search.html",
         search_query=search_query,
         autocomplete_results=autocomplete_results,
+        favorites=favorites,
     )
 
 
@@ -132,6 +144,13 @@ def stock(ticker):
     c = MW(ticker)  # should use company name instead of ticker
     summary = c.get_summary()
 
+    favorites = None
+    is_favorite = False
+    if "username" in session:
+        favorites = get_favorites(get_user_id(session["username"]))
+        if ticker in favorites:
+            is_favorite = True
+
     return render_template(
         "stock.html",
         name=name,
@@ -142,7 +161,30 @@ def stock(ticker):
         key_stats=key_stats,
         summary=summary,
         chart=chart,
+        favorites=favorites,
+        is_favorite=is_favorite,
     )
+
+
+@app.route("/favorite/<ticker>")
+def favorite(ticker):
+    """Favorites the given ticker if the user is logged in, redirects to
+    login page if not."""
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    add_favorite(get_user_id(session["username"]), ticker)
+    return redirect(url_for("stock", ticker=ticker))
+
+
+@app.route("/unfavorite/<ticker>")
+def unfavorite(ticker):
+    """Unfavorites the given ticker."""
+    if "username" not in session:
+        return redirect(url_for("stock", ticker=ticker))
+
+    remove_favorite(get_user_id(session["username"]), ticker)
+    return redirect(url_for("stock", ticker=ticker))
 
 
 if __name__ == "__main__":
