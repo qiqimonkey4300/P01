@@ -100,3 +100,8 @@ christopherL -- 2022-01-02 16:14
 - added some error handling
 - made the stock page prettier
 - added favorite/unfavorite feature
+
+shyneC -- 2022-01-02 19:28
+- description shows up instead of summary on stock page
+- update design doc
+- added description on homepage

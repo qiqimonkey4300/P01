@@ -25,9 +25,7 @@ class MW:
         )
         try:
             wiki = api_request.json()
-            summary = wiki["pages"][0][
-                "excerpt"
-            ]  # needs work, "amazon"'s first result is the people/rainforest
+            summary = wiki["pages"][0]["description"] 
             return summary
 
         # return filter(summary)

@@ -141,7 +141,7 @@ def stock(ticker):
 
     chart = price_chart(ticker)
 
-    c = MW(ticker)  # should use company name instead of ticker
+    c = MW(ticker) #ticker is fine
     summary = c.get_summary()
 
     favorites = None
