@@ -20,9 +20,9 @@ P01 — no-stock-GICS
       <div class="col-md-5">
         <h1>Current Price: {{ current_price }}</h1>
         {% if recommendation == "BUY" %}
-        <h3 class="text-success">BUY</h3>
+        <h3>Our Recomendation: <span class="text-success">BUY</span></h3>
         {% elif recommendation == "SELL" %}
-        <h3 class="text-danger">SELL</h3>
+        <h3>Our Recomendation: <span class="text-danger">SELL</span></h3>
         {% endif %}
       </div>
       <div class="col-md-2">
