@@ -105,3 +105,7 @@ shyneC -- 2022-01-02 19:28
 - description shows up instead of summary on stock page
 - update design doc
 - added description on homepage
+
+christopherL -- 2022-01-03 08:31
+- add more error handling
+- get stock full name from Yahoo Finance

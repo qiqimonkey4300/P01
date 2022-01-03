@@ -80,6 +80,9 @@ def summary_data(ticker: str) -> dict:
         if "quoteSummary" not in data:
             return None
 
+        if data["quoteSummary"]["result"] is None:
+            return None
+
         results = data["quoteSummary"]["result"][0]
         price_data = results["price"]
         summary_detail = results["summaryDetail"]
@@ -139,6 +142,35 @@ def price_chart(ticker: str) -> str:
         output_string = base64.b64encode(s.getvalue()).decode("utf-8").replace("\n", "")
 
         return output_string
+
+    except json.decoder.JSONDecodeError:
+        return None
+
+
+def full_name(ticker: str) -> str:
+    """Returns the full name of a company given its stock ticker."""
+    params = {"lang": "en", "symbols": ticker}
+    headers = {"x-api-key": YFA_KEY}
+    api_request = requests.request(
+        "GET",
+        "https://yfapi.net/v6/finance/quote",
+        headers=headers,
+        params=params,
+    )
+
+    if api_request.status_code != requests.codes.ok:  # pylint: disable=no-member
+        return None
+
+    try:
+        data = api_request.json()
+        if "quoteResponse" not in data:
+            return None
+
+        results = data["quoteResponse"]["result"][0]
+        if "longName" in results:
+            return results["longName"]
+        else:
+            return None
 
     except json.decoder.JSONDecodeError:
         return None

@@ -24,7 +24,7 @@ from user import (
 )
 from styvio import get_stock_sentiment
 from mediawiki import MW
-from yahoofinance import autocomplete, summary_data, price_chart
+from yahoofinance import autocomplete, summary_data, price_chart, full_name
 
 app = Flask(__name__)
 app.secret_key = urandom(32)
@@ -122,7 +122,17 @@ def stock(ticker):
     """Displays detailed information about the stock associated with the given
     ticker symbol."""
 
+    favorites = None
+    is_favorite = False
+    if "username" in session:
+        favorites = get_favorites(get_user_id(session["username"]))
+        if ticker in favorites:
+            is_favorite = True
+
     key_stats = summary_data(ticker)
+    if key_stats is None:
+        return render_template("not_found.html", ticker=ticker, favorites=favorites)
+
     if key_stats:
         current_price = key_stats.pop("current_price")
     else:
@@ -130,26 +140,19 @@ def stock(ticker):
 
     sentiment = get_stock_sentiment(ticker)
     if sentiment:
-        name = sentiment["name"]
         logo_url = sentiment["logo"]
         rating = sentiment["rating"]
         recommendation = "SELL" if rating == "Bullish" else "BUY"
     else:
-        name = "N/A"
         logo_url = ""
         recommendation = "N/A"
+
+    name = full_name(ticker)
 
     chart = price_chart(ticker)
 
     c = MW(ticker)  # ticker is fine
     summary = c.get_summary()
-
-    favorites = None
-    is_favorite = False
-    if "username" in session:
-        favorites = get_favorites(get_user_id(session["username"]))
-        if ticker in favorites:
-            is_favorite = True
 
     return render_template(
         "stock.html",
