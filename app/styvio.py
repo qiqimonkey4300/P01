@@ -14,7 +14,7 @@ import json
 import requests
 
 
-with open("api_keys/styvio.txt", "r", encoding="utf-8") as key:
+with open("api_keys/key_styvio.txt", "r", encoding="utf-8") as key:
     STYVIO_KEY = key.read().strip()
 
 
