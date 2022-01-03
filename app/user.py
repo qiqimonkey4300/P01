@@ -147,7 +147,6 @@ def add_favorite(user_id: str, ticker: str) -> None:
     favorites = get_favorites(user_id)
     if ticker not in favorites:
         favorites.append(ticker)
-    print(favorites)
 
     with sqlite3.connect(DB_FILE) as db:
         c = db.cursor()

@@ -25,7 +25,7 @@ class MW:
         )
         try:
             wiki = api_request.json()
-            summary = wiki["pages"][0]["description"] 
+            summary = wiki["pages"][0]["description"]
             return summary
 
         # return filter(summary)
