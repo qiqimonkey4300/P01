@@ -34,7 +34,10 @@ def get_summary(company_name: str) -> dict:
         summary_clean = re.sub(clean, "", summary)
         # At the end returns the first 500 characters of the full wiki
         if len(summary_clean) > 500:
-            return summary_clean[:500] + "..."
+            return {
+                "summary": summary_clean[:500] + "...",
+                "id": wiki["query"]["pages"][id]["pageid"],
+            }
         return {
             "summary": summary_clean,
             "id": wiki["query"]["pages"][id]["pageid"],
