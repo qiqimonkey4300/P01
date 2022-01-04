@@ -22,7 +22,7 @@ matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
 
-with open("api_keys/key_yahoofinance.txt", "r", encoding="utf-8") as key:
+with open("keys/key_yahoofinance.txt", "r", encoding="utf-8") as key:
     YFA_KEY = key.read().strip()
 
 
