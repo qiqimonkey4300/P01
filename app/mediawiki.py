@@ -14,7 +14,7 @@ import urllib.parse
 import requests
 
 
-def get_summary(company_name: str) -> str:
+def get_summary(company_name: str) -> dict:
     """Uses the MediaWiki API to retrieve a wiki summary based on the given
     company name"""
 
