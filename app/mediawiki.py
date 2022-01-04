@@ -8,27 +8,31 @@ MediaWiki
 """
 
 import requests, json
-
+import re
 
 class MW:
     def __init__(self, cname: str):
         self.cname = cname
 
-    # def filter()
-
     def get_summary(self) -> str:
         """Uses the MediaWiki API to retrieve a wiki summary based on the given
-        company name"""  # or ticker?
+        company name"""
 
         api_request = requests.get(
-            f"https://en.wikipedia.org/w/rest.php/v1/search/page?q={self.cname}"  # "&limit={NUMOFRESULTS}" is this needed?
+            #f"https://en.wikipedia.org/w/rest.php/v1/search/page?q={self.cname}"  # "&limit={NUMOFRESULTS}" is this needed?
+            f"https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&titles={self.cname}&redirects=true"
         )
         try:
             wiki = api_request.json()
-            summary = wiki["pages"][0]["description"]
-            return summary
+            #summary = wiki["pages"][0]["description"]
+            id = list(wiki["query"]["pages"])[0]
+            summary = wiki["query"]["pages"][id]["extract"]
+            """removes the HTML tags from the summary raw text and returns the cleaned version"""
+            clean = re.compile('<.*?>')
+            summaryClean = re.sub(clean, '', summary)
+            """at the end returns the first 400 characters of the full wiki"""
+            return summaryClean[:400] + "..."
 
-        # return filter(summary)
         except json.decoder.JSONDecodeError:
             return None
 
