@@ -35,7 +35,10 @@ def get_summary(company_name: str) -> str:
         # At the end returns the first 500 characters of the full wiki
         if len(summary_clean) > 500:
             return summary_clean[:500] + "..."
-        return summary_clean
+        return {
+            "summary": summary_clean,
+            "id": wiki["query"]["pages"][id]["pageid"],
+        }
 
     except json.decoder.JSONDecodeError:
         return None

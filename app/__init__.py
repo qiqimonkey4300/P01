@@ -151,7 +151,9 @@ def stock(ticker):
 
     chart = price_chart(ticker)
 
-    summary = get_summary(name)
+    wiki_summary = get_summary(name)
+    summary = wiki_summary["summary"]
+    wiki_link = wiki_summary["id"]
 
     return render_template(
         "stock.html",
@@ -162,6 +164,7 @@ def stock(ticker):
         recommendation=recommendation,
         key_stats=key_stats,
         summary=summary,
+        wiki_link=wiki_link,
         chart=chart,
         favorites=favorites,
         is_favorite=is_favorite,

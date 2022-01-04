@@ -114,3 +114,4 @@ christopherL -- 2022-01-04 08:25
 - increase mediawiki summary length
 - replace special characters in urls with escape sequences
 - error handling
+- add read more button
