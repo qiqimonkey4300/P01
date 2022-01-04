@@ -110,6 +110,10 @@ christopherL -- 2022-01-03 08:31
 - add more error handling
 - get stock full name from Yahoo Finance
 
+ivanM -- 2022-01-03 20:30
+- updated mediawiki api link
+- updated mediawiki to return a longer summary and to filter out html tags
+
 christopherL -- 2022-01-04 08:25
 - increase mediawiki summary length
 - replace special characters in urls with escape sequences
