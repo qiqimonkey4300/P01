@@ -23,7 +23,7 @@ from user import (
     remove_favorite,
 )
 from styvio import get_stock_sentiment
-from mediawiki import MW
+from mediawiki import get_summary
 from yahoofinance import autocomplete, summary_data, price_chart, full_name
 
 app = Flask(__name__)
@@ -151,8 +151,7 @@ def stock(ticker):
 
     chart = price_chart(ticker)
 
-    c = MW(ticker)  # ticker is fine
-    summary = c.get_summary()
+    summary = get_summary(name)
 
     return render_template(
         "stock.html",

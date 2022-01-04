@@ -56,7 +56,7 @@ def get_formatted_value(source: dict, key: str) -> str:
     string if it doesn't exist."""
 
     if key not in source or "fmt" not in source[key]:
-        return ""
+        return "N/A"
     return source[key]["fmt"]
 
 
